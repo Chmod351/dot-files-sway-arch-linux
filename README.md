@@ -1,6 +1,6 @@
 # My-config
 
-my config to my system, i will use [arch](https://aur.archlinux.org/), [sway](https://swaywm.org/) and neovim
+ [arch](https://aur.archlinux.org/), [sway](https://swaywm.org/) and neovim
 
 first run:
 
