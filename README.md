@@ -499,3 +499,23 @@ cd .config/waybar/config
 	}
 }
 ```
+
+# ranger config
+
+`
+cd .config/ranger/rc.config
+`
+
+```
+map DD shell mv %s /home/yamil/.local/share/Trash/files/
+set preview_images true
+set preview_script ~/.config/ranger/preview_script.sh
+set use_preview_script true
+set column_ratios 1,2,3
+set show_hidden true
+set line_numbers 0
+
+default_linemode devicons
+
+```
+
