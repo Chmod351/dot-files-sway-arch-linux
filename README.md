@@ -1,6 +1,15 @@
 # My-config
+ ![20231017_102207](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/196ac0d3-5572-4a86-9544-a81121b49268)
+ ![20231017_102236](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/0b143bf4-53f1-4f7e-b95e-64bb45442186)
+![20231017_102823](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/ba220bb8-451b-41f6-8570-a7bc956d04b5)
+![20231017_103009](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/cb3c4c85-0ad3-43e4-9e73-8ecda9eb8357)
+
+
 
  [arch](https://aur.archlinux.org/), [sway](https://swaywm.org/) waybar and [my neovim config for javascript/typescript fullstack development](https://github.com/yamilt351/neovim)
+
+
+
 
 first run:
 
