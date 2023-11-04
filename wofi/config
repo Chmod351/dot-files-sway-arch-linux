@@ -1,0 +1,9 @@
+color {
+    window = "#282828"
+    border = "#3c3836"
+    text = "#ebdbb2"
+    highlight = "#3c3836"
+    scrollbar = "#3c3836"
+    separator = "#504945"
+}
+
