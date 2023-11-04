@@ -1,0 +1,54 @@
+* {
+	font-size: 12px;
+	font-family: DejaVu Sans Mono;
+	font-weight:bold;
+}
+
+window#waybar {
+	background: #292b2e;
+	color: #fdf6e3;
+}
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+	color:#b8bb26;
+	font-size:19px;
+}
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	color: #292b2e;
+	background:#b8bb26;
+	font-size:19px;	
+}
+
+#workspaces,
+#clock.1,
+#clock.2,
+#clock.3,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#tray,
+#clipboard,
+#network,
+#keyboard-state,
+#temperature,
+#scratchpad,
+#disk {
+	background:#b8bb26;
+	color:#111;
+	padding: 0 2px;
+}
+
+#workspaces button {
+	padding: 0 6px;
+	color: #111;
+}
+#workspaces button:hover,
+#workspaces button.focused {
+	text-decoration:underline;
+	background:yellow;
+	box-shadow: inherit;
+	text-shadow: inherit;
+  border:1px solid #b8bb26;
+}

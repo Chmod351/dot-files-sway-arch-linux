@@ -1,0 +1,161 @@
+{
+	"layer": "top",
+	"height":0,
+	"position": "top",
+	"modules-left": [
+		"custom/clipboard",
+		"custom/right-arrow-light",
+		"sway/workspaces",
+		"sway/scratchpad",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"custom/right-arrow-dark",
+		"keyboard-state"
+	],
+	"modules-center": [
+		"custom/left-arrow-dark",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"clock#3",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"custom/right-arrow-dark",
+	],
+	"modules-right": [
+		"custom/left-arrow-dark",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"pulseaudio",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+//		"memory",
+//		"custom/left-arrow-light",
+//		"custom/left-arrow-dark",
+		"cpu",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"disk",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"network",
+		"temperature",
+
+	],
+ "custom/clipboard": {
+  "format": "    {}",
+	"tooltip":true,
+  "on-click": "cliphist list | wofi -d -p | cliphist decode | wl-copy",
+	"on-click-right": "cliphist wipe",
+  "interval": 5
+  },
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"sway/scratchpad": {
+	"format": "{icon} {count}",
+	"show-empty": false,
+	"format-icons": ["", "  "],
+	"tooltip": true,
+	"tooltip-format": "{app}: {title}"
+	},
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{icon}",
+		"format-icons": {
+		   "1": "",
+			 "2": " ",
+			 "3": " ",
+			 "urgent": "",
+			 "default": ""
+			 }
+	},	
+	"tray": {
+		"icon-size": 15
+	},
+	"clock#3": {
+		"format": "{:%H:%M | %a | %d-%m}",
+		"tooltip": true,
+  	"tooltip-format": "<tt><big>{calendar}</big></tt>"
+	},
+	"pulseaudio": {
+		"format": "{icon}  {volume:2}% {format_source}",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "MUTE",
+		"format-source": " {volume}%",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+		"on-click": "pamixer -t",
+		"on-click-right": "pavucontrol"
+	},
+	"memory": {
+		"interval": 5,
+		"format": " {}%"
+	},
+	"cpu": {
+		"interval": 5,
+		"format": "💻{usage:2}%"
+	},
+	"keyboard-state": {
+	 "numlock": true,
+	 "capslock": true,
+  	"format": "{name} {icon}",
+  	"format-icons": {
+  	"locked": "",
+  	"unlocked": ""
+ 	 }
+ },
+  "network": {
+	"format-wifi": "({signalStrength}%) ",
+	"format-ethernet": " 📶",
+	"tooltip-format": "{ifname} via {gwaddr} ",
+	"format-linked": "{ifname} (No IP) ",
+	"format-disconnected": "Disconnected ⚠",
+	"format-alt": "{ipaddr}"
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"temperature": {
+	"thermal-zone": 2,
+	"critical-threshold": 80,
+	"format-critical": "{icon} {temperatureC}°C",
+	"format": "{icon} {temperatureC}°C",
+	"format-icons": ["", "", ""]},
+	"disk": {
+		"interval": 5,
+		"format": "💾 {percentage_used:2}%",
+		"path": "/"
+	}
+}
