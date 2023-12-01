@@ -1,22 +1,28 @@
 window{
-  font-size:14px;
-  background-color:#1d2021;
-  border:1px solid #fe8019;
-  color:#fbf1c7;
-  font-family: monospace;
-	opacity: 0.8;
+  font-size:12px;
+  background-color:#1c1c1c;
+	margin:4px;
+  border:1px solid orange;
+  color:#d5c4a1;
+  font-family:"FiraCode Nerd Font";
 }
 
 #entry:selected{
-  background-color:#fabd2f;
+  background-color:orange;
   }
 
 #text:selected{
-    color:#1d2021;
+    color:black;
+		font-weight:bold;
   }
 
 #input{
     background-color:#282828;
-    border:1px solid #fe8019;
+    border:0.5px solid orange;
     color:#b8bb26;
+		padding:2px;
   }
+#input:enabled{
+	background-color:black;
+	border:1px solid transparent;
+}
