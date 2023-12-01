@@ -1,22 +1,22 @@
 * {
 	font-size: 12px;
-	font-family: DejaVu Sans Mono;
+	font-family: "FiraCode Nerd Font";
 	font-weight:bold;
 }
 
 window#waybar {
-	background: #292b2e;
+	background: #111111;
 	color: #fdf6e3;
 }
 #custom-right-arrow-dark,
 #custom-left-arrow-dark {
-	color:#b8bb26;
+	color:#3a3a3a;
 	font-size:19px;
 }
 #custom-right-arrow-light,
 #custom-left-arrow-light {
-	color: #292b2e;
-	background:#b8bb26;
+	color:#111111;
+	background:#3a3a3a;
 	font-size:19px;	
 }
 
@@ -30,25 +30,41 @@ window#waybar {
 #battery,
 #tray,
 #clipboard,
-#network,
 #keyboard-state,
+#keyboard-state label,
+#keyboard-state label.locked,
+#keyboard-state label.numlock,
+#keyboard-state label.numlock.locked,
+#keyboard-state label.capslock,
+#keyboard-state label.capslock.locked,
+#keyboard-state label.scrolllock,
+#keyboard-state label.scrolllock.locked,
+#custom-weather,
 #temperature,
 #scratchpad,
+#updates,
 #disk {
-	background:#b8bb26;
-	color:#111;
+	background:#3a3a3a;
+	color:orange;
 	padding: 0 2px;
 }
-
+#calendar,
+#network{
+	background:#3a3a3a;
+	color:#7ba3a4;
+	padding: 0 2px;
+	}
+#custom-clipboard{
+	color:#7ba3a4;
+	}
 #workspaces button {
 	padding: 0 6px;
-	color: #111;
+	color:#e2e086;
+	border:1px solid #3a3a3a;
 }
 #workspaces button:hover,
 #workspaces button.focused {
-	text-decoration:underline;
-	background:yellow;
-	box-shadow: inherit;
-	text-shadow: inherit;
-  border:1px solid #b8bb26;
+	background: #3a3a3a;
+	color:orange;
+	border:1px solid #3a3a3a;
 }
