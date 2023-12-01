@@ -1,20 +1,25 @@
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/d07421c6-5574-485c-a916-eb3293e599c6)
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/60a7fc2e-fba3-4e1c-a12c-1be6979584bf)
 
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/203e8ce9-700b-418a-be58-329607834c60)
+
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/ed15eed8-5440-410f-b073-e5ea17406ece)
+
+
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/881704d2-e3da-4237-b1db-a0b77885c79d)
 
 
 
 one terminal to rule them all with tmux
 
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/702e9b7c-4774-4bf7-8a73-f64ebe3d3e67)
-
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/cf6d86fd-5888-4622-a8e1-55997e17c8e7)
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/86a3def4-9bdf-40d4-84fd-5d763b1cc1bd)
 
 
-clipboard with wofi
+clipboard  and launch programs with wofi 
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/b2d9f2a6-3183-479c-85f2-1166efb214a4)
 
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/506a1a67-04b3-462f-8fe0-45c4f1621f4a)
+
+![screenshot_2023-12-01T20:18:59](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/8d877483-a4ae-45d1-aaf3-55b6db2c5587)
+
 
 code preview with higlight on ranger
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/bb8ae7b5-f942-4c8b-9579-5f16eb119431)
 
-![imagen](https://github.com/yamilt351/dot-files-sway-arch-linux/assets/88646148/ed2373ef-851e-41d5-9667-e1fcff97266c)
