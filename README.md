@@ -1,5 +1,7 @@
 ![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/60a7fc2e-fba3-4e1c-a12c-1be6979584bf)
 
+![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/9846b65e-2ed2-4d56-8e65-c53529fac8b9)
+
 
 ![image](https://github.com/Chmod351/dot-files-sway-arch-linux/assets/88646148/ed15eed8-5440-410f-b073-e5ea17406ece)
 
