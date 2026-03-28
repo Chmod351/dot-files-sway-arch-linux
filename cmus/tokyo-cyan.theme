@@ -1,0 +1,27 @@
+# --- Tokyo Night Cyan Theme ---
+
+# Colores de fondo y texto base (Usa los de Alacritty)
+set color_win_bg=default
+set color_win_fg=default
+
+# El cursor (Navegación) en Celeste Eléctrico
+set color_win_sel_bg=cyan
+set color_win_sel_fg=black
+
+# Lo que suena actualmente (Reproducción) en Violeta
+set color_win_cur=magenta
+set color_win_cur_sel_bg=magenta
+set color_win_cur_sel_fg=black
+
+# Barras de estado y comando (Gris/Negro con Cyan)
+set color_statusline_bg=black
+set color_statusline_fg=cyan
+set color_titleline_bg=black
+set color_titleline_fg=cyan
+set color_cmdline_bg=black
+set color_cmdline_fg=cyan
+
+# Extras: Errores y Directorios
+set color_error=red
+set color_info=blue
+set color_win_dir=blue

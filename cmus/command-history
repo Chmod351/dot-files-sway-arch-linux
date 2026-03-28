@@ -1,0 +1,37 @@
+filterC
+filter
+add /mnt/data1
+search akira
+Akira
+q
+colorscheme tokyo-cyan
+set color_statusline_fg=cyan
+set color_statusline_bg=black
+set color_win_cur_sel_fg=cyan
+set color_win_cur_sel_fg=magenta
+set color_win_cur_sel_fg=black
+set color_win_cur_sel_bg=black
+set color_win_cur_sel_bg=magenta
+set color_win_cur=magenta
+set color_win_sel_bg=cyan
+set color_win_sel_fg=black
+set color_win_fg=default
+set color_statusline_fg=black
+set color_statusline_bg=cyan
+set input_plugins?
+set dsp.alsa.device=default
+set output_plugin?
+live-filter LLL
+set status_display_program=/home/leo/.config/cmus/notify.sh
+set display_assistant=/home/leo/.config/cmus/notify.sh
+set display_assistant=/home/tu_usuario/.config/cmus/notify.sh
+colorscheme night
+colorscheme desert
+colorshceme desert
+set output_plugin=pulse
+set output_plugin=?
+save
+set music_directory=/mnt/data1
+set Música=/mnt/data1
+set Música_directory=/mnt/data1
+set Musica_directory=/mnt/data1
