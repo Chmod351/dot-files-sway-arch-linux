@@ -13,9 +13,9 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $print ~/script_bash/screenshots/screenshotsMove.sh
+set $print grim -g "$(slurp)" ~/Pictures/$(date +'%Y-%m-%d_%H-%M-%S').png
 set $term alacritty
-set $menu wofi --show run
+set $menu wofi --show run --allow-images images_size=10
 set $monitor1 DP-2
 set $monitor2 HDMI-A-2
 #---------------------------------------------------------------------------
@@ -28,7 +28,7 @@ bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-cop
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Descargas/backgrounds/7731900.jpg fill
+output * bg ~/Downloads/wallpaper.jpg fill
 #
 # Example configuration:
 #
@@ -37,12 +37,8 @@ output * bg ~/Descargas/backgrounds/7731900.jpg fill
     output DP-2 pos 0 0
 
     # Atajos de teclado para mover workspaces entre monitores
-    bindsym $mod+k move workspace to output $monitor1 && focus output $monitor2  
-    bindsym $mod+j move workspace to output $monitor2 
-    workspace 2 output DP-2
-    workspace 3 output DP-2
     workspace 1 output HDMI-A-2
-    workspace 4 output HDMI-A-2
+    workspace 2 output HDMI-A-2
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -94,8 +90,8 @@ output * bg ~/Descargas/backgrounds/7731900.jpg fill
 #
     # Move your focus around
     bindsym $mod+$left focus left
-#    bindsym $mod+$down focus down
-#    bindsym $mod+$up focus up
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
     bindsym $mod+$right focus right
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
@@ -114,7 +110,8 @@ output * bg ~/Descargas/backgrounds/7731900.jpg fill
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
     bindsym Print exec $print
-
+bindsym $mod+plus exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 #
 # Workspaces:
 #
@@ -144,15 +141,7 @@ output * bg ~/Descargas/backgrounds/7731900.jpg fill
     # We just use 1-10 as the default.
 
    
-    assign [app_id="^google-chrome"] workspace 3
-    assign [app_id="^firefoxdeveloperedition"] workspace 2
-    assign [app_id="^Alacritty$"] workspace number 1
-    assign [app_id="^lutris$"] workspace number 4
-    assign [class="krita"] 4
-    assign [class="Postman"] 4
-    assign [class="dbeaver"] 4
-    assign [class="Google-chrome"]  3
-    assign [class="firefox"] 4
+    assign [class="firefox"] 1
 #
 # Layout stuff:
 #
@@ -185,11 +174,12 @@ output * bg ~/Descargas/backgrounds/7731900.jpg fill
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+g move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+g scratchpad show
+
     bindsym $mod+c exec wl-copy
 #
 # Resizing containers:
@@ -217,32 +207,30 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-  bar {
-        swaybar_command waybar
-      }
-
 # 
 # no title bar
 # 
-for_window [app_id="^.*$"] hide_titlebar
+default_border pixel 0
+default_floating_border pixel 1
+hide_edge_borders smart
 default_border none
 
-#gaps inner 4
-#gaps outer 2
+gaps inner 4
+gaps outer 4
+
+exec mako
+exec_always waybar
+# exec_always wl-paste --primary --watch wl-copy
+exec_always wl-paste --type text --watch cliphist store
 
 # tareas on start up
 exec firefox
-exec google-chrome-stable
 exec alacritty
-exec firefox-developer-edition
 exec timedatectl set-timezone America/Argentina/Buenos_Aires
+exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec xdg-desktop-portal-wlr
-exec {
-    '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch cliphist store'
-    '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch pkill -RTMIN+9 waybar'
-}
-
 default_border pixel 1
 
-client.focused "#FFA500" "#FFA500" "#FFA500" "#FFA500"
+client.focused "#56E0F5" "#56E0F5" "#56E0F5" "#56E0F5"
+
 include /etc/sway/config.d/*

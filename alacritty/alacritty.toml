@@ -1,0 +1,43 @@
+[colors.primary]
+background = "0x0d0f14" # Un azul-negro profundo (No es negro puro, tiene profundidad)
+foreground = "0xc0caf5" # Un blanco azulado suave
+
+[colors.normal]
+black   = "0x32344a"
+red     = "0xf7768e" # Rojo Neón/Pastel
+green   = "0x9ece6a" # Verde Esmeralda
+yellow  = "0xe0af68" # Naranja/Amarillo cálido
+blue    = "0x7aa2f7" # Azul acero
+magenta = "0xbb9af7" # Púrpura eléctrico
+cyan    = "0x7dcfff" # <--- ESTE ES TU CELESTE ELÉCTRICO
+white   = "0x787c99"
+
+[colors.bright]
+black   = "0x444b6a"
+red     = "0xff007c" # Rojo más agresivo
+green   = "0xb9f27c"
+yellow  = "0xff9e64"
+blue    = "0x7da6ff"
+magenta = "0xbb9af7"
+cyan    = "0x0db9d7" # <--- CELESTE MÁS SATURADO
+white   = "0xacb0d0"
+
+[font]
+size = 10
+
+[font.bold]
+family = "FiraCode Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "FiraMono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[window]
+opacity = 0.8
+# [selection]
+# save_to_clipboard = true

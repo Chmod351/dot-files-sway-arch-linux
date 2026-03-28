@@ -5,138 +5,129 @@
 	"modules-left": [
 	  "tray",
 		"custom/clipboard",
-		"custom/right-arrow-light",
 		"sway/workspaces",
 		"keyboard-state",
-		"custom/right-arrow-dark",
-		"custom/right-arrow-light",
-		"custom/right-arrow-dark",
 	],
 	"modules-center": [
-		"custom/left-arrow-dark",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
 		"clock#3",
 		"custom/weather",
-		"custom/right-arrow-dark",
-		"custom/right-arrow-light",
-		"custom/right-arrow-dark",
 	],
 	"modules-right": [
-		"custom/left-arrow-dark",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
 		"pulseaudio",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
 		"disk",
 		"cpu",
-		"memory",
 		"temperature",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
+		"memory",
+		"custom/vram",
 		"network",
 	],
  "custom/clipboard": {
-  "format": "{}   ",
+	"format": "{}   ",
 	"tooltip":true,
-  "on-click": "cliphist list | wofi -d -p | cliphist decode | wl-copy",
+	"on-click": "cliphist list | wofi -d -p | cliphist decode | wl-copy",
 	"on-click-right": "cliphist wipe",
-  "interval": 5
-  },
-	"custom/left-arrow-dark": {
-		"format": "",
-		"tooltip": false
+	"interval": 5
 	},
-	"custom/left-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{icon}",
-		"format-icons": {
-		   "2": "  2",
-			 "1": "  1",
-			 "3": "  3",
-			 "4":"  4",
-			 "urgent": "  atention!",
-			 }
+"sway/workspaces": {
+	"disable-scroll": true,
+	"format": "{icon}",
+	"format-icons": {
+	   "2": "  2",
+	   "1": "  1",
+	   "3": "  3",
+     	 "4":"  4",
+	"urgent": "  atention!",
+	       }
 	},	
-	"tray": {
-		"icon-size": 15
-	},
-	"clock#3": {
-		"format": "{:%a %d-%m | %H:%M}",
-		"tooltip": true,
-  	"tooltip-format": "<tt><big>{calendar}</big>{}</tt>"
-	},
-	"pulseaudio": {
-		"format": "{icon}  {volume:2}% {format_source} ",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
-		"format-source": " {volume}%",
-		"format-source-muted": "",
-		"format-icons": {
-			"headphones": "",
-			"default": [
+"tray": {
+	"icon-size": 15
+ 	},
+"clock#3": {
+    "format": "{:%H:%M}",
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tooltip": true,
+    // El 'tooltip-format' define la estructura general
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
+    "calendar": {
+        "mode": "month",
+        "on-scroll": 1,
+        "format": {
+            "months":     "<span color='#7dcfff'><b>{}</b></span>",
+            "days":       "<span color='#a9b1d6'>{}</span>",
+            "weekdays":   "<span color='#ff9e64'><b>{}</b></span>",
+            "today":      "<span color='#0db9d7'><b><u>{}</u></b></span>" // <-- ESTO RESALTA EL DÍA ACTUAL
+        }
+    }
+},
+"custom/weather": {
+   "format": "{}°",
+    "exec": "wttrbar",
+    "return-type": "json",
+    "interval": 10000,
+    "tooltip": true
+},
+"pulseaudio": {
+	"format": "{icon}  {volume:2}% {format_source} ",
+	"format-bluetooth": "{icon}  {volume}%",
+	"format-muted": "MUTE",
+	"format-source": " {volume}%",
+	"format-source-muted": "",
+	"format-icons": {
+		"headphones": "",
+		"default": [
 				"",
 				""
 			]
 		},
-		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+	"scroll-step": 5,
+   "on-click":"pamixer -t",
+   "on-click-right":"pavucontrol"
 	},
-	"memory": {
-		"interval": 5,
-		"format": " {}% |"
+"memory": {
+	  "interval": 5,
+	  "format": "  {}%"
 	},
-	"cpu": {
-		"interval": 5,
-		"format": "💻 {usage:2}% |"
+"cpu": {
+	"interval": 5,
+	"format": "󰻠 {usage:2}%"
 	},
   "network": {
 	"format-wifi": "({signalStrength}%)   ",
-	"format-ethernet": " 📶 ",
+	"format-ethernet": " 󰈁 ",
 	"tooltip-format": "{gwaddr}",
 	"format-linked": "{ifname} (No IP) ",
 	"format-disconnected": "⚠ ",
 	"format-alt": "{ipaddr}"
 	},
-	"custom/weather": {
-    "format": " {} °",
-    "tooltip": true,
-    "interval": 3600,
-    "exec": "wttrbar",
-    "return-type": "json"
-},
-	"temperature": {
+
+"temperature": {
 	"thermal-zone": 2,
 	"critical-threshold": 80,
-	"format-critical": "{icon}{temperatureC}°C",
-	"format": "{icon} {temperatureC}°C ",
-	"format-icons": ["", "", ""]},
+	"format-critical": " {icon}{temperatureC}°C",
+	"format": " {temperatureC}°C ",
+	"format-icons": ["", "", ""]
+  },
 	"disk": {
 		"interval": 5,
-		"format": "💾 {percentage_used:2}% |",
+    "tooltip":true,
+		"format": " {percentage_used:2}% ",
 		"path": "/"
 	},
-	"keyboard-state": {
+"keyboard-state": {
 	"numlock": true,
 	"capslock": true,
-	"format": "{name} {icon}",
+	"format": "{icon}",
 	"format-icons": {
-		"locked": "",
-		"unlocked": ""
+		"locked": "  ",
+		"unlocked": ""
 	}
- }
+ },
+ "custom/vram": {
+	"format": " {}",
+	"return-type": "json",
+	"interval": 5,
+	"tooltip":true,
+	"exec": "~/.config/waybar/vram_amd.sh",
+	"on-click": "alacritty -e btop" 
+	}
 }
