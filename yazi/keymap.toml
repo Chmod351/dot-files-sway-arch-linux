@@ -1,0 +1,14 @@
+[[mgr.prepend_keymap]]
+on = "e"
+run = "shell -- unzip %s"
+desc = "extract zip"
+
+[[mgr.prepend_keymap]]
+on = "m"
+run = "shell -- zathura %s &"
+desc = "open manga"
+
+[[mgr.prepend_keymap]]
+on = "ñ"
+run = "shell -- mpv %s &"
+desc = "play video"

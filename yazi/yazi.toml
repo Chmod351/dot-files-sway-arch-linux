@@ -1,0 +1,63 @@
+[mgr]
+show_hidden = false
+show_symlink = true
+
+[preview]
+tab_size = 2
+max_width = 900
+max_height = 900
+image_filter = "triangle"
+image_quality = 75
+
+# --- OPENERS ---
+[opener]
+
+edit = [
+  { run = "nvim %s", block = true, desc = "Neovim" }
+]
+
+read_manga = [
+  { run = "zathura %s &", orphan = true, desc = "Zathura" }
+]
+
+view = [
+  { run = "imv %s &", orphan = true, desc = "Image viewer" }
+]
+
+# fallback ASCII preview si no hay backend gráfico
+chafa = [
+  { run = "chafa %s", block = true, desc = "Chafa preview" }
+]
+
+# --- REGLAS DE APERTURA ---
+[open]
+prepend_rules = [
+
+  # TEXTO / CÓDIGO → NVIM
+  { mime = "text/*", use = "edit" },
+  { url = "*.md", use = "edit" },
+  { url = "*.json", use = "edit" },
+  { url = "*.toml", use = "edit" },
+  { url = "*.lua", use = "edit" },
+  { url = "*.py", use = "edit" },
+  { url = "*.js", use = "edit" },
+  { url = "*.ts", use = "edit" },
+  { url = "*.html", use = "edit" },
+  { url = "*.css", use = "edit" },
+  { url = "*.sh", use = "edit" },
+  { url = "*.conf", use = "edit" },
+  { url = "*.config", use = "edit" },
+  { url = "*.yml", use = "edit" },
+  { url = "*.yaml", use = "edit" },
+
+  # SCRIPTS SIN EXT
+  { mime = "application/x-shellscript", use = "edit" },
+  { mime = "application/javascript", use = "edit" },
+
+  # MANGA
+  { url = "*.cbz", use = "read_manga" },
+  { url = "*.cbr", use = "read_manga" },
+
+  # IMÁGENES → VISOR EXTERNO
+  { mime = "image/*", use = "view" }
+]
