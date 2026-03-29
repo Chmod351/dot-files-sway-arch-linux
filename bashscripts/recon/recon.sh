@@ -86,8 +86,14 @@ fi
 echo "[+] Generando reporte maestro final..."
 bash "$PROCESSORS_DIR/merger.sh" "$TARGET"
 
+
+echo "[FASE 8] Buscando Vulnerabilidades Conocidas..."
+bash "$PROCESSORS_DIR/vulnerability_matcher.sh" "$TARGET"
+
 echo "[+] Lanzando Dashboard..."
 bash "$SCRIPT_DIR/output/dashboard.sh" "$TARGET"
+
+
 
 echo -e "\n--- [ OPERACIÓN COMPLETADA ] ---"
 
