@@ -28,7 +28,7 @@ sort -u "$OP_DIR/subs_raw.txt" > "$OP_DIR/subdominios.txt"
 rm "$OP_DIR/subs_raw.txt"
 
 # 2. DNS
-dnsx -silent -a -resp -l "$OP_DIR/subdominios.txt" > "$OP_DIR/dns.txt"
+dnsx -silent -nc -a -resp -l "$OP_DIR/subdominios.txt" > "$OP_DIR/dns.txt"
 cut -d' ' -f1 "$OP_DIR/dns.txt" > "$OP_DIR/resueltos.txt"
 
 # 3. HTTP
@@ -41,77 +41,74 @@ httpx-toolkit -silent -no-color -title -web-server -cdn -threads 50 \
 -l "$OP_DIR/lowNoice.txt" > "$OP_DIR/analisis.txt"
 
 # =========================
-# 5. INDEXACIÓN (CLAVE)
+# 5. INDEXACIÓN (NORMALIZADA)
 # =========================
 
-# dns.json → host -> ip
+# dns.json → host -> ip (Búsqueda inteligente de la IP en cualquier columna)
 awk '{
-  gsub(/\[|\]/,"",$2);
-  printf "%s %s\n", $1, $2
-}' "$OP_DIR/dns.txt" | jq -R 'split(" ") | {key: .[0], value: .[1]}' | jq -s 'from_entries' > "$OP_DIR/dns.json"
-
-# lowNoice.json → host -> url
-awk '{
-  url=$0
-  gsub(/^https?:\/\//,"",url)
-  host=url
-  sub(/\/.*/,"",host)
-  printf "%s %s\n", host, $0
-}' "$OP_DIR/lowNoice.txt" \
-| jq -R 'split(" ") | {key: .[0], value: .[1]}' \
-| jq -s 'from_entries' > "$OP_DIR/lowNoice.json"
+    ip="0.0.0.0"
+    for(i=1;i<=NF;i++) {
+        # Buscamos algo que parezca una IP (4 grupos de números)
+        if ($i ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ || $i ~ /^\[[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\]$/) {
+            ip=$i
+            gsub(/\[|\]/,"",ip) # Limpiamos corchetes si existen
+            break
+        }
+    }
+    if (ip != "0.0.0.0") printf "%s %s\n", $1, ip
+}' "$OP_DIR/dns.txt" \
+| jq -R 'split(" ") | {key: .[0], value: .[1]}' | jq -s 'from_entries' > "$OP_DIR/dns.json"
+# vivos.json → host -> url (CAMBIAMOS NOMBRE PARA EVITAR COLISIÓN)
+awk '{ url=$0; gsub(/^https?:\/\//,"",url); host=url; sub(/\/.*/,"",host); printf "%s %s\n", host, $0 }' "$OP_DIR/lowNoice.txt" \
+| jq -R 'split(" ") | {key: .[0], value: .[1]}' | jq -s 'from_entries' > "$OP_DIR/vivos.json"
 
 # analisis.json → host -> cdn
-awk '{
-  url=$1
-  gsub(/^https?:\/\//,"",url)
-  host=url
-  sub(/\/.*/,"",host)
-
+awk '{ 
+  url=$1; gsub(/^https?:\/\//,"",url); host=url; sub(/\/.*/,"",host)
   cdn="none"
   if (tolower($0) ~ /cloudflare/) cdn="cloudflare"
   else if (tolower($0) ~ /akamai/) cdn="akamai"
   else if (tolower($0) ~ /fastly/) cdn="fastly"
   else if (tolower($0) ~ /incapsula/) cdn="incapsula"
-
   printf "%s %s\n", host, cdn
 }' "$OP_DIR/analisis.txt" \
-| jq -R 'split(" ") | {key: .[0], value: {cdn: .[1]}}' \
-| jq -s 'from_entries' > "$OP_DIR/analisis.json"
+| jq -R 'split(" ") | {key: .[0], value: {cdn: .[1]}}' | jq -s 'from_entries' > "$OP_DIR/analisis.json"
+
 # =========================
-# 6. BUILD FINAL JSON
+# 6. BUILD FINAL JSON (CONSTRUIDO SOBRE EL TARGET)
 # =========================
 
 OUTPUT_JSON="$OP_DIR/lowNoice.json"
 
+# Corregimos la sintaxis de la llave dinámica ($target)
 jq -n \
   --arg target "$TARGET" \
   --slurpfile dns "$OP_DIR/dns.json" \
-  --slurpfile lowNoice "$OP_DIR/lowNoice.json" \
+  --slurpfile vivos "$OP_DIR/vivos.json" \
   --slurpfile analisis "$OP_DIR/analisis.json" '
 {
-  $target:{
-  subdomains: [
-    ($dns[0] | keys[]) as $host |
-    {
-      host: $host,
-      ip: $dns[0][$host],
-      url: ($lowNoice[0][$host] // ""),
-      alive: ($lowNoice[0][$host] != null),
-      cdn: ($analisis[0][$host].cdn // "none"),
-      status: (
-        if ($analisis[0][$host].cdn != null and $analisis[0][$host].cdn != "none")
-        then "protected"
-        else "exposed"
-       end
-       )
+  ($target): {
+    subdomains: [
+      ($dns[0] | keys[]) as $host |
+      {
+        host: $host,
+        ip: $dns[0][$host],
+        url: ($vivos[0][$host] // ""),
+        alive: ($vivos[0][$host] != null),
+        cdn: ($analisis[0][$host].cdn // "none"),
+        status: (
+          if ($analisis[0][$host].cdn != null and $analisis[0][$host].cdn != "none")
+          then "protected"
+          else "exposed"
+          end
+        )
       }
-   }
-  ]
+    ]
+  }
 }
 ' > "$OUTPUT_JSON"
-echo "[DONE] JSON generado en: $OUTPUT_JSON"
 
+echo "[DONE] JSON final generado en: $OUTPUT_JSON"
 echo "[+] Subdominios: $(wc -l < "$OP_DIR/subdominios.txt")"
 echo "[+] Resueltos: $(wc -l < "$OP_DIR/resueltos.txt")"
 echo "[+] Vivos: $(wc -l < "$OP_DIR/lowNoice.txt")"
