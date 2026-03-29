@@ -20,7 +20,7 @@ fi
 echo "[+] Escaneando con Nmap (sudo requerido)..."
 
 # Ejecutamos Nmap. El output XML irá a la carpeta de la OP.
-sudo nmap -sS -sV --top-ports 1000 --open -Pn "$TARGET" -oX "$TMP_XML" > /dev/null
+sudo nmap -sS -sV --top-ports 1000 --open -Pn --delay 500ms "$TARGET" -oX "$TMP_XML" > /dev/null
 
 # TRUCO DE OPERADOR: Cambiamos el dueño del XML para que nuestro usuario pueda leerlo
 sudo chown $USER:$USER "$TMP_XML"

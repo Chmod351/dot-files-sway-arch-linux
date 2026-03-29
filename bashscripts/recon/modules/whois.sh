@@ -4,11 +4,9 @@ TARGET="$1"
 BASEDIR="$HOME/Operaciones"
 OP_DIR="$BASEDIR/$TARGET"
 
-# Fuente de verdad: El JSON de la Fase 1
 INPUT_JSON="$OP_DIR/lowNoice.json"
 OUTPUT_FILE="$OP_DIR/whois_ips.json"
 
-# Verificación de seguridad
 if [[ ! -f "$INPUT_JSON" ]]; then
     echo "[-] Error: No existe el reporte de la Fase 1 ($INPUT_JSON)"
     exit 1
@@ -18,13 +16,17 @@ echo "--------------------------------------------------------------------------
 echo "-------[WHOIS] Enriqueciendo infraestructura desde JSON...----------------"
 echo "--------------------------------------------------------------------------"
 
-# Inicializamos como OBJETO vacío si no existe
-if [ ! -f "$OUTPUT_FILE" ] || [ ! -s "$OUTPUT_FILE" ]; then
-    echo "{}" > "$OUTPUT_FILE"
-fi
+echo "{}" > "$OUTPUT_FILE"
 
-# Extraemos host e ip directamente del JSON de la Fase 1 para iterar
-jq -r '.subdomains[] | "\(.host) \(.ip)"' "$INPUT_JSON" | while read -r domain ip; do
+# --- EL CAMBIO ESTÁ AQUÍ ---
+# Accedemos a .[$TARGET].subdomains porque el JSON ahora tiene al dominio como padre
+jq -r ".\"$TARGET\".subdomains[] | \"\(.host) \(.ip)\"" "$INPUT_JSON" | while read -r domain ip; do
+
+    # Validación de seguridad para no mandar basura al comando whois
+    if [[ ! "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        echo "[!] Saltando $domain: IP inválida ($ip)"
+        continue
+    fi
 
     echo "[+] Analizando WHOIS: $domain ($ip)"
 
@@ -39,8 +41,7 @@ jq -r '.subdomains[] | "\(.host) \(.ip)"' "$INPUT_JSON" | while read -r domain i
     REGISTRAR=$(echo "$DOM_DATA" | awk -F': *' 'tolower($1) ~ /registrar/ {print $2}' | head -n1 | xargs)
     CREATED=$(echo "$DOM_DATA" | awk -F': *' 'tolower($1) ~ /creation date|created/ {print $2}' | head -n1 | xargs)
 
-    # --- INYECCIÓN QUIRÚRGICA CON JQ ---
-    # Usamos el dominio como llave maestra para que el "Merge" final sea automático
+    # --- INYECCIÓN EN OBJETO ---
     jq --arg dom "$domain" \
        --arg ip "$ip" \
        --arg net "${NET:-unknown}" \
@@ -56,6 +57,12 @@ jq -r '.subdomains[] | "\(.host) \(.ip)"' "$INPUT_JSON" | while read -r domain i
            }
        }' "$OUTPUT_FILE" > "$OUTPUT_FILE.tmp" && mv "$OUTPUT_FILE.tmp" "$OUTPUT_FILE"
 
+
+     # --- [ EL SEGURO DE VIDA VA AQUÍ ] ---
+    # Generamos un delay aleatorio entre 3 y 7 segundos
+    WAIT=$(( ( RANDOM % 5 ) + 3 ))
+    echo "[-] Esperando $WAIT segundos para el siguiente WHOIS..."
+    sleep $WAIT
 done
 
 echo "[DONE] Whois consolidado en: $OUTPUT_FILE"

@@ -14,9 +14,9 @@ if [[ ! -f "$INPUT_JSON" ]]; then
     exit 1
 fi
 
-echo "-------------------------------------------------"
+echo "----------------------------------------------------"
 echo "[INTEL] Enriqueciendo datos técnicos para $TARGET..."
-echo "-------------------------------------------------"
+echo "----------------------------------------------------"
 # Inicializar como Objeto si no existe
 if [ ! -f "$OUTPUT_FILE" ] || [ ! -s "$OUTPUT_FILE" ]; then
     echo "{}" > "$OUTPUT_FILE"
