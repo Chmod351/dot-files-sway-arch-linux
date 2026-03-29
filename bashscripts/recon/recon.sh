@@ -6,6 +6,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # 2. Definir la ruta de los módulos usando esa base
 MODULES_DIR="$SCRIPT_DIR/modules" 
+PROCESSORS_DIR="$SCRIPT_DIR/processors"
+OUTPUT_DIR="$SCRIPT_DIR/output"
 
 BASEDIR="$HOME/Operaciones"
 OP_DIR="$BASEDIR/$TARGET"
@@ -31,39 +33,40 @@ echo "[FASE 3] Correlacion..."
 bash "$MODULES_DIR/intel.sh" "$TARGET" 
 echo "----------------------------------------------"
 
+# ----------------------------------------------
 # 3. PAUSA PARA ANÁLISIS
 echo ""
 echo "[FASE 4] Intervención manual requerida"
-echo "Revisá los archivos en: $OP_DIR"
-echo ""
-echo "Sugerido:"
-echo "  - expuestos.txt"
-echo "  - ips.txt"
-echo "  - whois_ips.txt"
+echo "Revisá el archivo maestro en: $OP_DIR/lowNoice.json"
 echo ""
 
+# 1. Extraemos la lista de expuestos para mostrarla en pantalla (nl lee de la tubería)
+echo "[+] Targets EXPUESTOS detectados (sin CDN):"
+EXPOSED_LIST=$(jq -r ".\"$TARGET\".subdomains[] | select(.status == \"exposed\") | .host" "$OP_DIR/lowNoice.json")
 
+if [[ -n "$EXPOSED_LIST" ]]; then
+    echo "$EXPOSED_LIST" | nl -w2 -s'. '
+else
+    echo "[!] No se detectaron targets expuestos directamente."
+fi
+
+echo ""
 read -p "Presioná ENTER para continuar con análisis manual..."
-# MOSTRAR TARGETS DISPONIBLES
-echo ""
-echo "[+] Targets disponibles:"
-nl -w2 -s'. ' "$OP_DIR/expuestos.txt"
 
-
+# ----------------------------------------------
 # 4. SELECCIÓN DE TARGET
 echo ""
 echo "[FASE 5] Selección de objetivo"
-read -p "Ingresá URL o dominio: " SELECTED_URL
 
-if [[ -z "$SELECTED_URL" ]]; then
-    echo "[-] No se ingresó ningún target. Saliendo."
-    exit 1
-fi
+# 2. Extraemos el primer host expuesto de la variable que ya tenemos en memoria
+DEFAULT_TARGET=$(echo "$EXPOSED_LIST" | head -n 1)
 
-# 5. HTTP (low-medium noise)
-echo ""
-echo "[FASE 6] HTTP HEADERS"
-bash "$MODULES_DIR/http.sh" "$SELECTED_URL"
+read -p "Ingresá URL o dominio [$DEFAULT_TARGET]: " SELECTED_URL
+
+# Si el usuario le da ENTER, usamos el default. Si no hay default, usamos el TARGET original.
+SELECTED_URL=${SELECTED_URL:-${DEFAULT_TARGET:-$TARGET}}
+
+echo "[+] Objetivo seleccionado: $SELECTED_URL"
 
 # 6. EXTRAER HOST PARA NMAP
 HOST=$(echo "$SELECTED_URL" | sed 's|http[s]*://||')
@@ -73,12 +76,20 @@ echo ""
 read -p "¿Ejecutar Nmap sobre $HOST? (y/n): " CONFIRM
 
 if [[ "$CONFIRM" == "y" ]]; then
-    echo ""
-    echo "[FASE 6] PORT SCAN"
+    echo "//------------------------------//"
+    echo "[FASE 7] PORT SCAN"
     bash "$MODULES_DIR/ports.sh" "$HOST"
 else
     echo "[INFO] Nmap cancelado."
 fi
+
+echo "[+] Generando reporte maestro final..."
+bash "$PROCESSORS_DIR/merger.sh" "$TARGET"
+
+echo "[+] Lanzando Dashboard..."
+bash "$SCRIPT_DIR/output/dashboard.sh" "$TARGET"
+
+echo -e "\n--- [ OPERACIÓN COMPLETADA ] ---"
 
 echo ""
 echo "--- [ FIN ] ---"
