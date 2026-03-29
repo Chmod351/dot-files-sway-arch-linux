@@ -34,11 +34,11 @@ cut -d' ' -f1 "$OP_DIR/dns.txt" > "$OP_DIR/resueltos.txt"
 # 3. HTTP
 httpx-toolkit -silent -no-color -threads 50 \
 -l "$OP_DIR/resueltos.txt" \
--o "$OP_DIR/vivos.txt"
+-o "$OP_DIR/lowNoice.txt"
 
 # 4. ANALISIS
 httpx-toolkit -silent -no-color -title -web-server -cdn -threads 50 \
--l "$OP_DIR/vivos.txt" > "$OP_DIR/analisis.txt"
+-l "$OP_DIR/lowNoice.txt" > "$OP_DIR/analisis.txt"
 
 # =========================
 # 5. INDEXACIÓN (CLAVE)
@@ -50,16 +50,16 @@ awk '{
   printf "%s %s\n", $1, $2
 }' "$OP_DIR/dns.txt" | jq -R 'split(" ") | {key: .[0], value: .[1]}' | jq -s 'from_entries' > "$OP_DIR/dns.json"
 
-# vivos.json → host -> url
+# lowNoice.json → host -> url
 awk '{
   url=$0
   gsub(/^https?:\/\//,"",url)
   host=url
   sub(/\/.*/,"",host)
   printf "%s %s\n", host, $0
-}' "$OP_DIR/vivos.txt" \
+}' "$OP_DIR/lowNoice.txt" \
 | jq -R 'split(" ") | {key: .[0], value: .[1]}' \
-| jq -s 'from_entries' > "$OP_DIR/vivos.json"
+| jq -s 'from_entries' > "$OP_DIR/lowNoice.json"
 
 # analisis.json → host -> cdn
 awk '{
@@ -82,35 +82,36 @@ awk '{
 # 6. BUILD FINAL JSON
 # =========================
 
-OUTPUT_JSON="$OP_DIR/intel.json"
+OUTPUT_JSON="$OP_DIR/lowNoice.json"
 
 jq -n \
   --arg target "$TARGET" \
   --slurpfile dns "$OP_DIR/dns.json" \
-  --slurpfile vivos "$OP_DIR/vivos.json" \
+  --slurpfile lowNoice "$OP_DIR/lowNoice.json" \
   --slurpfile analisis "$OP_DIR/analisis.json" '
 {
-  target: $target,
-  subdomains: (
+  $target:{
+  subdomains: [
     ($dns[0] | keys[]) as $host |
     {
       host: $host,
       ip: $dns[0][$host],
-      url: ($vivos[0][$host] // ""),
-      alive: ($vivos[0][$host] != null),
+      url: ($lowNoice[0][$host] // ""),
+      alive: ($lowNoice[0][$host] != null),
       cdn: ($analisis[0][$host].cdn // "none"),
       status: (
         if ($analisis[0][$host].cdn != null and $analisis[0][$host].cdn != "none")
         then "protected"
         else "exposed"
-        end
-      )
-    }
-  )
+       end
+       )
+      }
+   }
+  ]
 }
 ' > "$OUTPUT_JSON"
 echo "[DONE] JSON generado en: $OUTPUT_JSON"
 
 echo "[+] Subdominios: $(wc -l < "$OP_DIR/subdominios.txt")"
 echo "[+] Resueltos: $(wc -l < "$OP_DIR/resueltos.txt")"
-echo "[+] Vivos: $(wc -l < "$OP_DIR/vivos.txt")"
+echo "[+] Vivos: $(wc -l < "$OP_DIR/lowNoice.txt")"
