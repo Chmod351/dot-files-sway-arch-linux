@@ -1,9 +1,17 @@
+q
+Q
+live-filter JJKKKKK
+d
+erase
+delete
+add /mnt/data1
+set repeat_current=false
+set continue=true
+repeat_current=false
 filterC
 filter
-add /mnt/data1
 search akira
 Akira
-q
 colorscheme tokyo-cyan
 set color_statusline_fg=cyan
 set color_statusline_bg=black

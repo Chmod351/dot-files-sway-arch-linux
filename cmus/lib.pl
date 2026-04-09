@@ -150,6 +150,7 @@
 /mnt/data1/Música/todoke_kanai_kimochi.mp3
 /mnt/data1/Música/death.mp3
 /mnt/data1/Música/Akira Takemoto - Track 44.mp3
+/mnt/data1/Música/Cozy Library Coffee Shop Lofi ☕ — Deep Focus to Work, Study & Relax ｜ Lofi Music.mp3
 /mnt/data1/Música/yt1z.net - Luis Fonsi - Se Supone (320 KBps).mp3
 /mnt/data1/Música/o_fortuna.mp3
 /mnt/data1/Música/shingeki.mp3

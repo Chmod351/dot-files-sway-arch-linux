@@ -206,10 +206,9 @@ bindsym $mod+r mode "resize"
 # 
 # no title bar
 # 
-default_border pixel 1
-default_floating_border pixel 1
-hide_edge_borders smart
-default_border none
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders none
 
 gaps inner 4
 gaps outer 4
@@ -220,8 +219,6 @@ exec_always waybar
 exec_always wl-paste --type text --watch cliphist store
 
 # tareas on start up
-exec firefox
-exec alacritty
 exec timedatectl set-timezone America/Argentina/Buenos_Aires
 exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec xdg-desktop-portal-wlr
