@@ -12,6 +12,9 @@ GPU_EDGE=$(cat /sys/class/hwmon/hwmon1/temp1_input | awk '{print $1/1000}')
 GPU_JUNC=$(cat /sys/class/hwmon/hwmon1/temp2_input | awk '{print $1/1000}')
 GPU_FAN=$(cat /sys/class/hwmon/hwmon1/fan1_input)
 
+
+VRAM_USED_RAW=$(cat /sys/class/class/drm/card0/device/mem_info_vram_used)
+VRAM_USED=$(echo "$VRAM_USED_RAW" | awk '{printf "%.2f", $1/1024/1024/1024}') # En GiB
 # Formateo con Pango para que se vea Monoespaciado y con Colores NERV
 # Usamos <tt> para forzar Teletype (mono) y <span> para el color
 TITULO="<span color='#ff8700'><b>── SYSTEM STATUS ──</b></span>"
@@ -35,6 +38,7 @@ TOOLTIP+="  Core 2:  ${C2}°C\n"
 TOOLTIP+="  Core 3:  ${C3}°C\n"
 TOOLTIP+="${SEP}\n"
 TOOLTIP+="<span color='#af5f00'>󰢮 GPU Status:</span>\n"
+TOOLTIP+="  Uso:       ${VRAM_USED} GB \n"
 TOOLTIP+="  Edge:      ${GPU_EDGE}°C\n"
 TOOLTIP+="  Junction:  ${GPU_JUNC}°C\n"
 TOOLTIP+="  Fans:      ${GPU_FAN} RPM</tt>"
