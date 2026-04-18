@@ -19,6 +19,7 @@
 		"temperature",
 		"memory",
 		"custom/vram",
+    "temperature#gpu",
 		"network",
 	],
  "custom/clipboard": {
@@ -122,6 +123,14 @@
 		"unlocked": ""
 	}
  },
+ "temperature#gpu": {
+    "hwmon-path-abs": "/sys/class/drm/card0/device/hwmon",
+    "input-filename": "temp1_input",
+    "critical-threshold": 80,
+    "format": "󰢮 {temperatureC}°C",
+    "format-critical": "󰢮 {temperatureC}°C ",
+    "interval": 2
+},
  "custom/vram": {
 	"format": " {}",
 	"return-type": "json",

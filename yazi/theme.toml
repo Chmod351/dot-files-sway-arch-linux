@@ -1,0 +1,27 @@
+[manager]
+border_symbol = "│"
+border_style  = { fg = "#ffb000" }
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#ffb000", bg = "#ffb000" }
+
+# Modo Normal (Naranja)
+mode_normal = { fg = "#000000", bg = "#ffb000", bold = true }
+# Modo Seleccionar (Amarillo Crema)
+mode_select = { fg = "#000000", bg = "#FFE082", bold = true }
+# Modo Unset (Naranja Tierra)
+mode_unset  = { fg = "#000000", bg = "#FB8C00", bold = true }
+
+# Esto cambia el color de las carpetas (directorio)
+[filetable]
+directory = { fg = "#e65100", bold = true } # Naranja Tierra
+# Esto cambia el color de los archivos normales (si los querés más claros)
+file = { fg = "#ffcc80" }
+
+# Esto cambia el color de los enlaces simbólicos (cyan en tu config anterior)
+symlink = { fg = "#ff9800" }
+
+# Esto es para la línea donde estás parado (la selección)
+selection = { bg = "#332211", fg = "#ffb000", bold = true }

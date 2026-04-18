@@ -1,37 +1,105 @@
+/* --- CONFIGURACIÓN GLOBAL --- */
 * {
-	font-size: 12px;
-	font-family: "FiraCode Nerd Font";
-	font-weight:bold;
-}
-
-window#waybar {
-	background: #000000;
-}
-
-#cpu, #memory, #temperature,#disk,#custom-vram {
-    color:#565f89; /* Gris azulado (Información base) */
-}
-
-#cpu.critical, #memory.critical ,#custom-vram.critical{
+    border: none;
+    border-radius: 0;
+    font-family: "FiraCode Nerd Font", "FiraCode Nerd Font Mono";
+    font-size: 12px; /* Un punto más para legibilidad */
     font-weight: bold;
-    color: #f7768e; /* Rojo (Solo cuando hay problemas) */
+    min-height: 0;
 }
 
-#pulseaudio.muted {
-    color: #565f89; /* Gris oscuro (No molesta) */
+/* --- BARRA PRINCIPAL --- */
+window#waybar {
+    background: #000000;
+    /* color: #FFB74D; [> Naranja base <] */
+    border-bottom: 1px solid #FB8C00;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* --- WORKSPACES (Jerarquía de navegación) --- */
+#workspaces button {
+    padding: 0 8px;
+    color: #FB8C00; /* Inactivos: Naranja oscuro */
+    background: transparent;
 }
 
 #workspaces button.focused {
-    color: #7dcfff; /* Celeste Eléctrico (Donde estás ahora) */
-    border-bottom: 2px solid #7dcfff;
+    color: #FFE082; /* ACTIVO: Amarillo Crema (Foco principal) */
+    background: #1a1a1a; /* Un gris-negro muy sutil para destacar el botón */
+    border-bottom: 2px solid #FFE082;
+}
+
+#workspaces button.urgent {
+    color: #f7768e; /* Alerta en rojo */
+}
+
+#workspaces button:hover {
+    background: #333333;
+    color: #FFE082;
+}
+
+/* --- MÓDULOS DE INFORMACIÓN (Jerarquía 2) --- */
+#cpu, 
+#memory, 
+#temperature, 
+#disk, 
+#custom-vram, 
+#network, 
+#pulseaudio, 
+#tray, 
+#updates,
+#custom-weather {
+    padding: 0 10px;
+    color: #FFB74D; /* Naranja Medio */
+}
+
+/* --- RELOJ (Jerarquía 1: El dato más consultado) --- */
+#clock {
+    color: #FFE082; /* Amarillo Clarito */
+    padding: 0 10px;
+}
+
+/* --- ESTADOS ESPECIALES (Jerarquía 3: Alertas) --- */
+#cpu.critical, 
+#memory.critical, 
+#custom-vram.critical,
+#temperature.critical {
+    color: #f7768e; /* Rojo Neón */
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.5; }
 }
 
 #custom-vram.medium {
-    color: #e0af68; /* AMARILLO/NARANJA: Estás editando o procesando algo */
+    color: #e0af68; /* Naranja Cálido (Carga media) */
 }
 
+#pulseaudio.muted {
+    color: #563D2D; /* Marrón Sepia (Desactivado/No distrae) */
+}
 
+/* --- OTROS ELEMENTOS --- */
+#custom-clipboard {
+    color: #FB8C00;
+    padding: 0 5px;
+}
 
+#calendar {
+    background: #000000;
+    padding: 15px;
+    border: 1px solid #FB8C00;
+    color: #FFE082;
+}
+
+#tray menu {
+    background: #000000;
+    border: 1px solid #FB8C00;
+}
+
+/* --- PADDING DE AJUSTE --- */
 #workspaces,
 #clock.1,
 #clock.2,
@@ -39,42 +107,13 @@ window#waybar {
 #tray,
 #clipboard,
 #keyboard-state,
-#keyboard-state label,
-#keyboard-state label.locked,
-#keyboard-state label.numlock,
-#keyboard-state label.numlock.locked,
-#keyboard-state label.capslock,
-#keyboard-state label.capslock.locked,
-#keyboard-state label.scrolllock,
-#keyboard-state label.scrolllock.locked,
 #custom-weather,
 #scratchpad,
-#network,
-#pulseaudio,
 #updates {
-	color:#56E0F5;
-	padding: 0 2px;
+    padding: 0 3px;
 }
 
-#calendar{
-	background:#3a3a3a;
-	color:#56E0F5;
-	padding: 0 10px;
-	}
-
-#custom-clipboard{
-	color:#7ba3a4;
-	}
-
-#workspaces button {
-	padding: 0 6px;
-	color:#e2e086;
+#custom-separator {
+    color: #333333;
+    margin: 0 5px;
 }
-#workspaces button:hover {
-	padding: 0 6px;
-  border:none;
-  border-color: #565f89;
-	color:orange;
-  background: #565f89;
-}
-

@@ -19,7 +19,14 @@ set $menu wofi --show run --allow-images images_size=10
 set $monitor1 DP-2
 set $monitor2 HDMI-A-2
 #---------------------------------------------------------------------------
+set $amber #ffb000
+set $bg_black #000000
+set $inactive #333333
 
+# target                 title     bg        text      indicator border
+client.focused           $amber    $amber    $bg_black $amber    $amber
+client.focused_inactive  $inactive $inactive $amber    $inactive $inactive
+client.unfocused         $inactive $inactive $inactive $inactive $inactive
 #---------------------------------------------------------------------------
 # Clipboard
 bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-copy"
@@ -28,7 +35,7 @@ bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-cop
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Downloads/wallpaper.jpg fill
+# output * bg ~/Downloads/wallpaper.jpg fill
 #
 # Example configuration:
 #
@@ -112,6 +119,7 @@ output * bg ~/Downloads/wallpaper.jpg fill
     bindsym Print exec $print
    bindsym $mod+plus exec pactl set-sink-volume @DEFAULT_SINK@ +5%
    bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+   bindsym $mod+Shift+b exec pkill wlsunset || exec wlsunset -l -34.6 -L -58.4 -t 3200 -T 5500
 #
 # Workspaces:
 #
@@ -222,7 +230,7 @@ exec_always wl-paste --type text --watch cliphist store
 exec timedatectl set-timezone America/Argentina/Buenos_Aires
 exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec xdg-desktop-portal-wlr
-
-client.focused "#56E0F5" "#56E0F5" "#56E0F5" "#56E0F5"
+exec_always pkill calcurse; calcurse --daemon
+exec wlsunset -l -34.6 -L -58.4 -t 3000 -T 5500
 
 include /etc/sway/config.d/*

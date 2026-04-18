@@ -1,27 +1,37 @@
 [colors.primary]
-background = "0x0d0f14" # Un azul-negro profundo (No es negro puro, tiene profundidad)
-foreground = "0xc0caf5" # Un blanco azulado suave
+background = "0x000000"
+# Un crema/ámbar muy claro. Es lo que vas a leer el 90% del tiempo.
+foreground = "0xffcc80" 
 
 [colors.normal]
-black   = "0x32344a"
-red     = "0xf7768e" # Rojo Neón/Pastel
-green   = "0x9ece6a" # Verde Esmeralda
-yellow  = "0xe0af68" # Naranja/Amarillo cálido
-blue    = "0x7aa2f7" # Azul acero
-magenta = "0xbb9af7" # Púrpura eléctrico
-cyan    = "0x7dcfff" # <--- ESTE ES TU CELESTE ELÉCTRICO
-white   = "0x787c99"
+black   = "0x1d202f"
+# Rojo: Alertas. Mantenemos el que tenés, es bueno.
+red     = "0xf7768e" 
+# Verde: Éxito / Ejecutables. Un verde bosque que no cansa.
+green   = "0x7cb342" 
+# Amarillo: Advertencias. Un oro sólido.
+yellow  = "0xffb300" 
+# Blue: CARPETAS. Un naranja ladrillo/tierra. (Menos brillo para no distraer).
+blue    = "0xe65100" 
+# Magenta: Constantes/Especiales. Un rosa viejo.
+magenta = "0xcf6276" 
+# Cyan: LINKS / VARIABLES. Un naranja neón pero sutil.
+cyan    = "0xff9800" 
+white   = "0xa9b1d6"
 
 [colors.bright]
 black   = "0x444b6a"
-red     = "0xff007c" # Rojo más agresivo
-green   = "0xb9f27c"
-yellow  = "0xff9e64"
-blue    = "0x7da6ff"
+red     = "0xff007c"
+# El verde brillante para cuando algo sale bien.
+green   = "0x9ece6a" 
+# El AMARILLO CLARITO para resaltar texto importante.
+yellow  = "0xffe082" 
+# Azul brillante -> Naranja eléctrico.
+blue    = "0xffa726" 
 magenta = "0xbb9af7"
-cyan    = "0x0db9d7" # <--- CELESTE MÁS SATURADO
+# Cyan brillante -> El color de tus links activos.
+cyan    = "0xffcc80" 
 white   = "0xacb0d0"
-
 [font]
 size = 10
 
@@ -38,6 +48,6 @@ family = "FiraCode Nerd Font"
 style = "Regular"
 
 [window]
-opacity = 0.8
+opacity = 1
 # [selection]
 # save_to_clipboard = true

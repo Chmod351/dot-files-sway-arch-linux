@@ -1,4 +1,19 @@
+set color_win_cur_sel_bg=222
+set color_win_sel_fg=black
+set color_win_sel_bg=214
 q
+set color_win_sel_bg=222
+set color_cmdline_fg=214
+set color_cmdline_bg=default
+set color_titleline_fg=black
+set color_titleline_bg=214
+set color_statusline_fg=214
+set color_statusline_bg=default
+set clor_win_sel_fg=black
+set color_win_fg=214
+set color_win_bg=default
+filter 
+add ../../mnt/data1/Música/
 Q
 live-filter JJKKKKK
 d
@@ -22,7 +37,6 @@ set color_win_cur_sel_bg=black
 set color_win_cur_sel_bg=magenta
 set color_win_cur=magenta
 set color_win_sel_bg=cyan
-set color_win_sel_fg=black
 set color_win_fg=default
 set color_statusline_fg=black
 set color_statusline_bg=cyan

@@ -63,6 +63,7 @@
 /mnt/data1/Música/in-your-past.mp3
 /mnt/data1/Música/i_see_you.mp3
 /mnt/data1/Música/ivan torrent crystalline.mp3
+/mnt/data1/Música/Kicking It - Dyalla.mp3
 /mnt/data1/Música/kimimaro.mp3
 /mnt/data1/Música/knights_and_lords.mp3
 /mnt/data1/Música/lagrimas.mp3
@@ -86,6 +87,7 @@
 /mnt/data1/Música/no-hace-falta.mp3
 /mnt/data1/Música/no_puedo_dejarte_de_amar.mp3
 /mnt/data1/Música/ojala-pudiera-borrarte.mp3
+/mnt/data1/Música/On The Flip - The Grey Room _ Density & Time.mp3
 /mnt/data1/Música/palabras_para_paula.mp3
 /mnt/data1/Música/penelope.mp3
 /mnt/data1/Música/please-forgive-me.mp3
@@ -148,10 +150,12 @@
 /mnt/data1/Música/yiruma-love-me.mp3
 /mnt/data1/Música/yo-queria.mp3
 /mnt/data1/Música/todoke_kanai_kimochi.mp3
+/mnt/data1/Música/Emotional Music - Departure.mp3
 /mnt/data1/Música/death.mp3
 /mnt/data1/Música/Akira Takemoto - Track 44.mp3
 /mnt/data1/Música/Cozy Library Coffee Shop Lofi ☕ — Deep Focus to Work, Study & Relax ｜ Lofi Music.mp3
 /mnt/data1/Música/yt1z.net - Luis Fonsi - Se Supone (320 KBps).mp3
 /mnt/data1/Música/o_fortuna.mp3
 /mnt/data1/Música/shingeki.mp3
+/mnt/data1/Música/Hardcore Gaming Music - 1HR of Gaming Techno.mp3
 /mnt/data1/Música/1994 Hacked successfully Synthwave, Retrowave, Outrun, Cyberpunk, Chillwave.mp3

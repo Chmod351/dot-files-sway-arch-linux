@@ -1,14 +1,14 @@
 window{
   font-size:12px;
-  background-color:#1c1c1c;
+  background-color:#000;
 	margin:4px;
-  border:1px solid orange;
-  color:#d5c4a1;
+  border:1px solid #FFE082;
+  color:#FFE082;
   font-family:"FiraCode Nerd Font";
 }
 
 #entry:selected{
-  background-color:orange;
+  background-color:#FB8C00;
   }
 
 #text:selected{
@@ -17,9 +17,9 @@ window{
   }
 
 #input{
-    background-color:#282828;
-    border:0.5px solid orange;
-    color:#b8bb26;
+    background-color:#000;
+    border:0.5px solid #FFE082;
+    color:#FFE082;
 		padding:2px;
   }
 #input:enabled{
