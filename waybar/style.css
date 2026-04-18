@@ -63,9 +63,9 @@ window#waybar {
     font-weight: bold;
     transition: all 0.3s ease;
 }
-#custom-telemetria.critical {
-    background-color: #f7768e;
-    color: #ffffff;
+window#waybar .module#custom-telemetria.critical {
+    background-color: red;
+    color: #000;
     animation: blinker 0.5s linear infinite; 
   }
 /* --- RELOJ (Jerarquía 1: El dato más consultado) --- */
