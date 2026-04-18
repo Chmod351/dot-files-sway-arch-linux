@@ -1,37 +1,28 @@
 [colors.primary]
-background = "0x000000"
-# Un crema/ámbar muy claro. Es lo que vas a leer el 90% del tiempo.
-foreground = "0xffcc80" 
+background = "0x1a0a02" # Casi negro puro para que el naranja flote
+foreground = "0xff8700" # El naranja "NERV" clásico
 
 [colors.normal]
-black   = "0x1d202f"
-# Rojo: Alertas. Mantenemos el que tenés, es bueno.
-red     = "0xf7768e" 
-# Verde: Éxito / Ejecutables. Un verde bosque que no cansa.
-green   = "0x7cb342" 
-# Amarillo: Advertencias. Un oro sólido.
-yellow  = "0xffb300" 
-# Blue: CARPETAS. Un naranja ladrillo/tierra. (Menos brillo para no distraer).
-blue    = "0xe65100" 
-# Magenta: Constantes/Especiales. Un rosa viejo.
-magenta = "0xcf6276" 
-# Cyan: LINKS / VARIABLES. Un naranja neón pero sutil.
-cyan    = "0xff9800" 
-white   = "0xa9b1d6"
+black   = "0x1c1c1c"
+red     = "0xaf0000" # Un rojo oscuro sangre
+green   = "0x5f8700" # Un verde oliva táctico
+yellow  = "0xaf8700" # Un oro viejo
+blue    = "0xff8700" # Naranja (Mantenemos el monocromatismo)
+magenta = "0xaf5f00" # Naranja quemado
+cyan    = "0xffaf00" # Naranja claro para links
+white   = "0xbcbcbc"
 
 [colors.bright]
-black   = "0x444b6a"
-red     = "0xff007c"
-# El verde brillante para cuando algo sale bien.
-green   = "0x9ece6a" 
-# El AMARILLO CLARITO para resaltar texto importante.
-yellow  = "0xffe082" 
-# Azul brillante -> Naranja eléctrico.
-blue    = "0xffa726" 
-magenta = "0xbb9af7"
-# Cyan brillante -> El color de tus links activos.
-cyan    = "0xffcc80" 
-white   = "0xacb0d0"
+black   = "0x444444"
+red     = "0xd70000"
+green   = "0x87af00"
+yellow  = "0xffaf00" # Amarillo ámbar brillante
+blue    = "0xff8700"
+magenta = "0xd78700"
+cyan    = "0xffd700" # El color para lo que tiene que resaltar sí o sí
+white   = "0xffffff"
+
+
 [font]
 size = 10
 

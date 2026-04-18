@@ -40,11 +40,8 @@ window#waybar {
 }
 
 /* --- MÓDULOS DE INFORMACIÓN (Jerarquía 2) --- */
-#cpu, 
 #memory, 
-#temperature, 
 #disk, 
-#custom-vram, 
 #network, 
 #pulseaudio, 
 #tray, 
@@ -54,6 +51,15 @@ window#waybar {
     color: #FFB74D; /* Naranja Medio */
 }
 
+
+#custom-telemetria {
+    background-color: #af8700;
+    color: #050505;
+    padding: 0 10px;
+    border-radius: 6px;
+    margin-left: 10px;
+    font-weight: bold;
+}
 /* --- RELOJ (Jerarquía 1: El dato más consultado) --- */
 #clock {
     color: #FFE082; /* Amarillo Clarito */
@@ -61,21 +67,31 @@ window#waybar {
 }
 
 /* --- ESTADOS ESPECIALES (Jerarquía 3: Alertas) --- */
-#cpu.critical, 
-#memory.critical, 
-#custom-vram.critical,
-#temperature.critical {
+#memory.critical{
     color: #f7768e; /* Rojo Neón */
     animation: blinker 1s linear infinite;
 }
+
+
+tooltip {
+    background: rgba(5, 5, 5, 0.95); /* El negro de tu Alacritty con un toque de transparencia */
+    border: 1px solid #ff8700; /* Borde naranja NERV */
+    border-radius: 4px;
+}
+
+tooltip label {
+    color: #ff8700;
+    font-family: "JetBrains Mono", "Terminus", "monospace"; /* Usá tu fuente de Alacritty */
+    font-size: 14px;
+    padding: 8px;
+}
+
+
 
 @keyframes blinker {
     50% { opacity: 0.5; }
 }
 
-#custom-vram.medium {
-    color: #e0af68; /* Naranja Cálido (Carga media) */
-}
 
 #pulseaudio.muted {
     color: #563D2D; /* Marrón Sepia (Desactivado/No distrae) */

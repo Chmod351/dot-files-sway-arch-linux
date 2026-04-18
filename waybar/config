@@ -15,11 +15,12 @@
 	"modules-right": [
 		"pulseaudio",
 		"disk",
-		"cpu",
-		"temperature",
+		// "cpu",
+		// "temperature",
+    "custom/telemetria",
 		"memory",
-		"custom/vram",
-    "temperature#gpu",
+		// "custom/vram",
+    // "temperature#gpu",
 		"network",
 	],
  "custom/clipboard": {
@@ -88,10 +89,10 @@
 	  "interval": 5,
 	  "format": "  {}%"
 	},
-"cpu": {
-	"interval": 5,
-	"format": "󰻠 {usage:2}%"
-	},
+/* "cpu": { */
+	/* "interval": 5, */
+	/* "format": "cpu {usage:2}%" */
+	/* }, */
   "network": {
 	"format-wifi": "({signalStrength}%)   ",
 	"format-ethernet": " 󰈁 ",
@@ -101,13 +102,12 @@
 	"format-alt": "{ipaddr}"
 	},
 
-"temperature": {
-	"thermal-zone": 2,
-	"critical-threshold": 80,
-	"format-critical": " {icon}{temperatureC}°C",
-	"format": " {temperatureC}°C ",
-	"format-icons": ["", "", ""]
-  },
+/* "temperature": { */
+    /* "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input", */
+    /* "critical-threshold": 80, */
+    /* "format": " {temperatureC}°C", */
+    /* "tooltip-format": "Package: {temperatureC}°C\nCore 0: {temp2}°C\nCore 1: {temp3}°C\nCore 2: {temp4}°C\nCore 3: {temp5}°C" */
+/* }, */
 	"disk": {
 		"interval": 5,
     "tooltip":true,
@@ -123,20 +123,27 @@
 		"unlocked": ""
 	}
  },
- "temperature#gpu": {
-    "hwmon-path-abs": "/sys/class/drm/card0/device/hwmon",
-    "input-filename": "temp1_input",
-    "critical-threshold": 80,
-    "format": "󰢮 {temperatureC}°C",
-    "format-critical": "󰢮 {temperatureC}°C ",
-    "interval": 2
+/* "temperature#gpu": { */
+    /* "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input", */
+    /* "critical-threshold": 85, */
+    /* "format": "{temperatureC}°C", */
+    /* "tooltip":true, */
+    /* "tooltip-format": "GPU Edge: {temperatureC}°C\nFans: {fan1} RPM",  */
+    /* "interval": 2 */
+/* }, */
+"custom/telemetria": {
+    "exec": "~/.dotfiles/bashscripts/telemetria.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true
 },
- "custom/vram": {
-	"format": " {}",
-	"return-type": "json",
-	"interval": 5,
-	"tooltip":true,
-	"exec": "~/.config/waybar/vram_amd.sh",
-	"on-click": "alacritty -e btop" 
-	}
+/*  "custom/vram": { */
+	/* "format": " {}", */
+	/* "return-type": "json", */
+	/* "interval": 5, */
+	/* "tooltip":true, */
+	/* "exec": "~/.config/waybar/vram_amd.sh", */
+	/* "on-click": "alacritty -e sensors" */
+	/* } */
 }

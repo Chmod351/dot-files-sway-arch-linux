@@ -34,4 +34,4 @@ elif [ "$PERC" -ge 60 ]; then
 fi
 
 # Salida JSON compatible con Waybar
-echo "{\"text\": \"󰍛 ${USED}MB\", \"tooltip\": \"Uso de VRAM: ${PERC}% de ${TOTAL}MB\", \"class\": \"$CLASS\"}"
+echo "{\"text\": \"gpu ${USED}MB\", \"tooltip\": \"Uso de VRAM: ${PERC}% de ${TOTAL}MB\", \"class\": \"$CLASS\"}"
