@@ -23,10 +23,10 @@ set $amber #ffb000
 set $bg_black #000000
 set $inactive #333333
 
-# target                 title     bg        text      indicator border
-client.focused           $amber    $amber    $bg_black $amber    $amber
-client.focused_inactive  $inactive $inactive $amber    $inactive $inactive
-client.unfocused         $inactive $inactive $inactive $inactive $inactive
+# target                 border      bg          text        indicator   child_border
+client.focused           $amber      $amber      $bg_black   $amber      $amber
+client.focused_inactive  $inactive   $inactive   $amber      $inactive   $inactive
+client.unfocused         $inactive   $inactive   $inactive   $inactive   $inactive
 #---------------------------------------------------------------------------
 # Clipboard
 bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-copy"
@@ -214,9 +214,11 @@ bindsym $mod+r mode "resize"
 # 
 # no title bar
 # 
+for_window [class=".*"] border pixel 2
+for_window [title=".*"] border pixel 2
 default_border pixel 2
 default_floating_border pixel 2
-hide_edge_borders none
+hide_edge_borders --i3 smart
 
 gaps inner 4
 gaps outer 4

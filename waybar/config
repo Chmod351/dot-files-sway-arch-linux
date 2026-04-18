@@ -14,13 +14,9 @@
 	],
 	"modules-right": [
 		"pulseaudio",
-		"disk",
-		// "cpu",
-		// "temperature",
+		"custom/diskcapacity",
     "custom/telemetria",
 		"memory",
-		// "custom/vram",
-    // "temperature#gpu",
 		"network",
 	],
  "custom/clipboard": {
@@ -89,10 +85,6 @@
 	  "interval": 5,
 	  "format": "  {}%"
 	},
-/* "cpu": { */
-	/* "interval": 5, */
-	/* "format": "cpu {usage:2}%" */
-	/* }, */
   "network": {
 	"format-wifi": "({signalStrength}%)   ",
 	"format-ethernet": " 󰈁 ",
@@ -101,13 +93,6 @@
 	"format-disconnected": "⚠ ",
 	"format-alt": "{ipaddr}"
 	},
-
-/* "temperature": { */
-    /* "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input", */
-    /* "critical-threshold": 80, */
-    /* "format": " {temperatureC}°C", */
-    /* "tooltip-format": "Package: {temperatureC}°C\nCore 0: {temp2}°C\nCore 1: {temp3}°C\nCore 2: {temp4}°C\nCore 3: {temp5}°C" */
-/* }, */
 	"disk": {
 		"interval": 5,
     "tooltip":true,
@@ -123,14 +108,6 @@
 		"unlocked": ""
 	}
  },
-/* "temperature#gpu": { */
-    /* "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input", */
-    /* "critical-threshold": 85, */
-    /* "format": "{temperatureC}°C", */
-    /* "tooltip":true, */
-    /* "tooltip-format": "GPU Edge: {temperatureC}°C\nFans: {fan1} RPM",  */
-    /* "interval": 2 */
-/* }, */
 "custom/telemetria": {
     "exec": "~/.dotfiles/bashscripts/telemetria.sh",
     "return-type": "json",
@@ -138,12 +115,12 @@
     "format": "{}",
     "tooltip": true
 },
-/*  "custom/vram": { */
-	/* "format": " {}", */
-	/* "return-type": "json", */
-	/* "interval": 5, */
-	/* "tooltip":true, */
-	/* "exec": "~/.config/waybar/vram_amd.sh", */
-	/* "on-click": "alacritty -e sensors" */
-	/* } */
+"custom/diskcapacity": {
+    "exec": "~/.dotfiles/bashscripts/diskcapacity.sh",
+    "return-type": "json",
+    "interval": 60, // El espacio en disco no cambia cada 2 segundos, con 1 min sobra.
+    "format": "{}",
+    "tooltip": true,
+    "on-click": "alacritty -e df -h"
+},
 }

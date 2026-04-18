@@ -16,6 +16,16 @@ GPU_FAN=$(cat /sys/class/hwmon/hwmon1/fan1_input)
 # Usamos <tt> para forzar Teletype (mono) y <span> para el color
 TITULO="<span color='#ff8700'><b>── SYSTEM STATUS ──</b></span>"
 SEP="<span color='#555555'>──────────────────────</span>"
+LIMITE=80
+ESTADO=""
+
+# Verificamos si CPU o GPU superan el límite (usamos printf para convertir a entero)
+CPU_INT=$(printf "%.0f" "$CPU_PKG")
+GPU_INT=$(printf "%.0f" "$GPU_EDGE")
+
+if [ "$CPU_INT" -ge "$LIMITE" ] || [ "$GPU_INT" -ge "$LIMITE" ]; then
+    ESTADO="critical"
+fi
 
 TOOLTIP="<tt>${TITULO}\n"
 TOOLTIP+="<span color='#af8700'>󰻠 CPU Cores:</span>\n"
@@ -33,4 +43,4 @@ TOOLTIP+="  Fans:      ${GPU_FAN} RPM</tt>"
 TEXTO="󰻠 ${CPU_PKG}°C | 󰢮 ${GPU_EDGE}°C"
 
 # Output JSON
-echo "{\"text\": \"$TEXTO\", \"tooltip\": \"$TOOLTIP\"}"
+echo "{\"text\": \"$TEXTO\", \"tooltip\": \"$TOOLTIP\", \"class\": \"$ESTADO\"}"

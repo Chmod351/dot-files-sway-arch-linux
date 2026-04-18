@@ -22,6 +22,8 @@ window#waybar {
     padding: 0 8px;
     color: #FB8C00; /* Inactivos: Naranja oscuro */
     background: transparent;
+    border-bottom: 2px solid transparent; /* Agregamos el borde invisible aquí */
+    margin-bottom: -1px; /* Compensamos el border-bottom de la barra si es necesario */
 }
 
 #workspaces button.focused {
@@ -41,7 +43,7 @@ window#waybar {
 
 /* --- MÓDULOS DE INFORMACIÓN (Jerarquía 2) --- */
 #memory, 
-#disk, 
+#custom-diskcapacity, 
 #network, 
 #pulseaudio, 
 #tray, 
@@ -59,7 +61,13 @@ window#waybar {
     border-radius: 6px;
     margin-left: 10px;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
+#custom-telemetria.critical {
+    background-color: #f7768e;
+    color: #ffffff;
+    animation: blinker 0.5s linear infinite; 
+  }
 /* --- RELOJ (Jerarquía 1: El dato más consultado) --- */
 #clock {
     color: #FFE082; /* Amarillo Clarito */
