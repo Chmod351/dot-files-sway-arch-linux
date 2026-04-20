@@ -218,7 +218,7 @@ for_window [class=".*"] border pixel 2
 for_window [title=".*"] border pixel 2
 default_border pixel 2
 default_floating_border pixel 2
-hide_edge_borders --i3 smart
+# hide_edge_borders --i3 smart
 
 gaps inner 4
 gaps outer 4
