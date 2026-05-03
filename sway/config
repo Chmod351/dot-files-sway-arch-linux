@@ -30,6 +30,8 @@ client.unfocused         $inactive   $inactive   $inactive   $inactive   $inacti
 #---------------------------------------------------------------------------
 # Clipboard
 bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-copy"
+bindsym $mod+n exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym $mod+m exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 # ---------------------------------------------------------------------------
 
 ### Output configuration
@@ -227,10 +229,11 @@ exec mako
 exec_always waybar
 # exec_always wl-paste --primary --watch wl-copy
 exec_always wl-paste --type text --watch cliphist store
-
+xwayland enable
 # tareas on start up
 exec timedatectl set-timezone America/Argentina/Buenos_Aires
-exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec xdg-desktop-portal-wlr
 exec_always pkill calcurse; calcurse --daemon
 exec wlsunset -l -34.6 -L -58.4 -t 3000 -T 5500
