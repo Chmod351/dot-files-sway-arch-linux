@@ -53,7 +53,6 @@ window#waybar {
     color: #FFB74D; /* Naranja Medio */
 }
 
-
 #custom-telemetria {
     background-color: #af8700;
     color: #050505;
@@ -63,12 +62,15 @@ window#waybar {
     font-weight: bold;
     transition: all 0.3s ease;
 }
+
 window#waybar .module#custom-telemetria.critical {
     background-color: red;
     color: #000;
     animation: blinker 0.5s linear infinite; 
   }
 /* --- RELOJ (Jerarquía 1: El dato más consultado) --- */
+
+#keyboard-state,
 #clock {
     color: #FFE082; /* Amarillo Clarito */
     padding: 0 10px;
