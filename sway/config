@@ -30,8 +30,8 @@ client.unfocused         $inactive   $inactive   $inactive   $inactive   $inacti
 #---------------------------------------------------------------------------
 # Clipboard
 bindsym $mod+Shift+d exec "cliphist list | wofi -d -p | cliphist decode | wl-copy"
-bindsym $mod+n exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-bindsym $mod+m exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym $mod+minus exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym $mod+plus exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 # ---------------------------------------------------------------------------
 
 ### Output configuration
@@ -119,8 +119,8 @@ bindsym $mod+m exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
     bindsym Print exec $print
-   bindsym $mod+plus exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-   bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+   # bindsym $mod+plus exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+   # bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
    bindsym $mod+Shift+b exec pkill wlsunset || exec wlsunset -l -34.6 -L -58.4 -t 3200 -T 5500
 #
 # Workspaces:
